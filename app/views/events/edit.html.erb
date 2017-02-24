@@ -1,0 +1,18 @@
+<a style="float:right" href="/events">Events Dashboard </a>
+<h2>Edit Event</h2>
+<form action="/events/<%=@event.id%>" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+	<input type="hidden" name="_method" value="patch">
+	<p><label for="">Name</label>
+	<input type="text" name="name" value="<%=@event.name%>"></p>
+	<p><label for="">Date</label>
+	<input type="date" name="date" value="<%=@event.date%>"></p>
+	<p><label for="">Location</label>
+	<input type="text" name="location" value="<%=@event.location%>">
+	<select name="state" value="<%=@event.state%>">
+<% @states.each do |state| %>
+		<option value="<%=state%>"><%= state%></option>
+<% end %>
+	</select></p>
+	<input type="submit" value="Update Event">
+</form>

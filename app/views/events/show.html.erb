@@ -1,0 +1,41 @@
+<a style="float:right" href="/events">Events Dashboard </a>
+<div id="left_box">
+<h2><%= @event.name%></h2>
+<p>Host: <%= @event.user.first_name%></p>
+<p>Date: <%= @event.date%></p>
+<p>Location: <%= @event.location%>, <%= @event.state%></p>
+<p>People who are joining the event:<%= @event.joins.count%></p>
+<table>
+	<thead>
+		<tr>
+			<th class>Name</th>
+			<th>Location</th>
+			<th>State</th>
+		</tr>
+	</thead>
+	<tbody>
+<% @event.users.each do |user|%>
+		<tr>
+			<td><%= user.first_name%></td>
+			<td><%= user.location%></td>
+			<td><%= user.state%></td>
+		</tr>
+<%end%>
+	</tbody>
+</table>
+</div>
+<div id="right_box">
+<p>Discussion about this event:</p>
+	<div id="comments">
+<% @event.comments.each do |comment|%>	
+		<p><%= comment.user.first_name %> says: <%= comment.content %></p>
+		<hr>
+<%end%>
+	</div>
+	<p>Add Comment</p>
+	<form action="/comments/<%= @event.id%>" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+		<textarea name="content" id="" cols="30" rows="5"></textarea><br>
+		<input type="submit" value="Submit Comment">	
+	</form>
+</div>

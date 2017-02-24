@@ -1,0 +1,94 @@
+<h1>Welcome <%= @user.first_name%></h1>
+<a style="float:right" href="/users/<%= @user.id%>/edit">Edit My Profile</a>
+<p>Here are some of the events at your state</p>
+<table>
+<thead>
+	<tr>
+		<th class="name">Name</th>
+		<th class="date">Date</th>
+		<th class="location">Location</th>
+		<th class="host">Host</th>
+		<th class="action">Action/Status</th>
+	</tr>
+</thead>
+<tbody>
+<% @events.each do |event|%>
+<% if current_user.state == event.state %>
+	<tr>
+		<td><a href="/events/<%=event.id%>"><%=event.name%></a></td>
+		<td><%=event.date%></td>
+		<td><%=event.location%></td>
+		<td><%=event.user.first_name%></td>
+		<td  class="last_column">
+	<% if current_user == event.user%>
+			<a href="/events/<%=event.id%>/edit">Edit</a>
+			<a data-method="delete" href="/events/<%=event.id%>">Delete</a>
+	<%else%>	
+		<% if !event.users.include? current_user  %>
+		<a data-method="post" href="/joins/<%=event.id%>">Join</a>
+		<%else%>
+			Joining
+			<a data-method="delete" href="/joins/<%=event.id%>">Cancel</a>
+		<%end%>
+		</td>
+	</tr>
+	<%end%>
+<%end%>
+<%end%>
+</tbody>
+</table>
+<p>Here are some of the events at your state</p>
+<table>
+<thead>
+	<tr>
+		<th class="name">Name</th>
+		<th class="date">Date</th>
+		<th class="location">Location</th>
+		<th class="state">State</th>
+		<th class="host">Host</th>
+		<th class="action">Action/Status</th>
+	</tr>
+</thead>
+<tbody>
+<% @events.each do |event|%>
+<% if current_user.state != event.state %>
+	<tr>
+		<td><a href="/events/<%=event.id%>"><%=event.name%></a></td>
+		<td><%=event.date%></td>
+		<td><%=event.location%></td>
+		<td><%=event.state%></td>
+		<td><%=event.user.first_name%></td>
+		<td  class="last_column">
+	<% if current_user == event.user%>
+			<a href="/events/<%=event.id%>/edit">Edit</a>
+			<a data-method="delete" href="/events/<%=event.id%>">Delete</a>
+	<%else%>	
+		<% if !event.users.include? current_user  %>
+			<a data-method="post" href="/joins/<%=event.id%>">Join</
+		<%else%>
+			Joining
+			<a data-method="delete" href="/joins/<%=event.id%>">Cancel</a>
+			<%end%>
+		</td>
+	</tr>
+	<%end%>
+<%end%>
+<%end%>
+</tbody>
+</table>
+<h2>Add Event</h2>
+<form action="/events" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+	<p><label for="">Name</label>
+	<input type="text" name="name"></p>
+	<p><label for="">Date</label>
+	<input type="date" name="date"></p>
+	<p><label for="">Location</label>
+	<input type="text" name="location">
+	<select name="state">
+<% @states.each do |state| %>
+		<option value="<%=state%>"><%= state%></option>
+<% end %>
+	</select></p>
+	<input type="submit" value="Add Event">
+</form>

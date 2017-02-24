@@ -1,0 +1,45 @@
+table{
+	border-collapse: collapse;
+}
+td,th{
+	border: 1px solid black;
+}
+form{
+	display: inline-block;
+}
+.name{
+	width: 150px;
+}
+.date{
+	width: 100px;
+}
+.location{
+	width: 110px;
+}
+.host{
+	width: 100px;
+}
+.state{
+	width: 40px;
+}
+.action{
+	width: 130px;
+}
+.last_column{
+	padding-left: 10px;
+}
+#comments{
+	width: 300px;
+	height: 200px;
+	overflow: scroll;
+	border: 1px solid black;
+}
+#right_box{
+	display: inline-block;
+	vertical-align: top;
+	width: 40%;
+}
+#left_box{
+	display: inline-block;
+	width: 40%;
+}

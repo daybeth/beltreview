@@ -1,0 +1,35 @@
+<fieldset>
+<legend><h2>Create User</h2></legend>
+<form action="/users" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+	<p><label for="">First Name</label>
+	<input type="text" name="user[first_name]"></p>
+	<p><label for="">Last Name</label>
+	<input type="text" name="user[last_name]"></p>
+	<p><label for="">Location</label>
+	<input type="text" name="user[location]">
+	<select name="user[state]">
+	<% @states.each do |state| %>
+		<option value="<%=state%>"><%= state%></option>
+	<% end %>
+	</select>
+	<p><label for="">Email</label>
+	<input type="email" name="user[email]"></p>
+	<p><label for="">Password</label>
+	<input type="password" name="user[password]"></p>
+	<p><label for="">Confirm Password </label>
+	<input type="password" name="user[password_confirmation]"></p>
+	<input type="submit" value="Join">
+</form>
+</fieldset>
+<fieldset>
+<legend><h2>Log In</h2></legend>
+<form action="/sessions" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token%>">
+	<p><label for="">Email</label>
+	<input type="email" id="email" name="email"></p>
+	<p><label for="">Password</label>
+	<input id="password" type="password" name="password"></p>
+	<input type="submit" value="Log In">
+</form>
+</fieldset>
